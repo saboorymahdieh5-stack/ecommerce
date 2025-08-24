@@ -1,24 +1,36 @@
-hb<?php 
-//include('autoload/autoload.php');
-//include("model/factory.php");
-//$conn=$GLOBALS['newFactory']->test("modelCategory");
-$conn=factory::test("modelCategory");
-$result=$conn->select();
+<!DOCTYPE html>
+<html>
+<head>
+    </head>
+    <body>
+    <?php 
+      //include("model/modelCategory.php");
+      // $category=factory::factory("category");
+      // var_dump($category);
+      $result = category::select(["id","title","description"])->get();
+    //   echo $result -> num_rows ;
+      // var_dump($result);
+      ?>
+    <form action="getProductForm" method="post">
+        <input type="text" name='name'>
+        <input type="text" name='price'>
+        <!-- <input type="text" name='category'> -->
+        <input type="text" name='description'>
 
-
-?>
-<form action="http://localhost/ecommerce/getProductForm " method="post">
-    <input type="text" name="name" placeholder="NAME PRODUCT">
-    <input type="text" name="price" placeholder="PRICE PRODUCT">
-    <select name="category">
-     <?php while($category=$result->fetch_assoc()){?>
-        <option value="<?= $category['id'] ?>">
-            <?=$category['title'];?>
-     </option>
-     <?php
-     }
-     ?>
-     </select>
-    <input type="text" name="description" placeholder="DESCRIPTION PRODUCT">
-    <button type="submit">save</button>
+        <select name="category">
+            <?php 
+            for($i = 0; $i < $result -> num_rows ; $i++){
+                $categorytitle = $result -> fetch_assoc();
+                // echo $categorytitle;
+                ?>
+                <option value="<?=$categorytitle['id'];?>">
+                    <?= $categorytitle['title'];?>
+                </option>
+            <?php
+            }
+            ?>
+            </select>
+        <button>send</button>
 </form>
+</body>
+</html>

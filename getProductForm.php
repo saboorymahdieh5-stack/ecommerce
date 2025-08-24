@@ -1,7 +1,8 @@
-<?php
-//include('autoload/autoload.php');
-//include("model/factory.php");
-//$conn=$GLOBALS['newFactory']->test("modelProduct");
-$conn=factory::test("modelProduct");
-$result=$conn->create($_POST);
-?>
+<?php 
+
+// include("model/modelProduct.php");
+// include("factory.php");
+// $product=factory::factory("product");
+//var_dump($modelProduct);
+$m=product::create($_POST);
+// var_dump($m);

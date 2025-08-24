@@ -1,17 +1,15 @@
 <?php 
-//include('autoload/autoload.php');
-
-//include("model/factory.php");
-$id=$GLOBALS['urlArray'][3];
-//$conn=$GLOBALS['newFactory']->test("modelFooter");
-$conn=factory::test("modelFooter");
-$result=$conn->find($id);
-$footer=$result->fetch_assoc();
+$id=$GLOBALS['urlArray'][4];
+// var_dump($id);
+// $modelFooter=factory::factory("footer");
+$integer=(int)$id;
+$result=footer::find($integer);
+// var_dump($result);
+// $footer=$result->fetch_assoc();
 ?>
-<form action="../updateFooterForm.php" method="post">
-    <input type="hidden" name="id" value="<?php echo $footer['id'];?>" >
-    <input type="text" name="nameDesigner" value="<?php echo $footer['nameDesigner'];?>">
-    <input type="text" name="phonNumber" value="<?php echo $footer['phonNumber'];?>">
-    <input type="text" name="description" value="<?php echo $footer['description'];?>">
+<form action="http://localhost/tamrinb/ecommerce1/updateFooterForm/<?=$GLOBALS['urlArray'][4]?>" method="post">
+    <input type="text" name="nameDesigner" value="<?php echo $result['nameDesigner'];?>">
+    <input type="text" name="phonNumber" value="<?php echo $result['phonNumber'];?>">
+    <input type="text" name="description" value="<?php echo $result['description'];?>">
     <button type="submit">SEND</button>
 </form>

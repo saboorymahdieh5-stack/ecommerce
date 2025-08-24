@@ -1,9 +1,4 @@
-<?php 
-//include('autoload/autoload.php');
-//include("model/factory.php");
-//$conn=$GLOBALS['newFactory']->test("modelFooter");
-$conn=factory::test("modelFooter");
-?>
+<div>
 <form action="getFooterForm" method="post">
 
     <input type="text" name="nameDesigner" placeholder="NAMEDESIGNER FOOTER">
@@ -12,3 +7,4 @@ $conn=factory::test("modelFooter");
 
     <button type="submit">save</button>
 </form>
+</div>

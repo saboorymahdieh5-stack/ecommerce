@@ -1,34 +1,50 @@
-n<?php
-abstract class mainDb{
-    abstract function create($data);
-    abstract function update($data);
+<?php
+// $connection= new mysqli("localhost","root","","ecommerce1");
+// $connection->query("SELECT * FROM product");
+//$connection->query("INSERT INTO product(name,price,category,description)VALUES('panir','23000','labaniat','panir ast')");
+//$connection->query("UPDATE product SET name='mast', price='30000' , category='labaniat' , description='bad ast' WHERE id=1 ");
 
-    public $serverName="localhost";
-    public $userName="root";
-    public $password="";
-    public $dbName="ecommerce";
-    public $conn;
-    public $table;
-
-    function __construct(){
-        $this->conn=new mysqli($this->serverName,$this->userName,$this->password,$this->dbName);
+class mainDb{
+    public static $connection;
+    protected static $table;
+    public static $instances=[];
+    // public static function __construct(){
+    //     $this->connection=new mysqli("localhost","root","","ecommerce1");
+    // }
+    public static function getObj(){
+       return self::$connection=new mysqli("localhost","root","","ecommerce1");
     }
-
-    public function select(){
-        $selectQuery="SELECT * FROM $this->table";
-        return $this->conn->query($selectQuery);
+    public static function getInstance(){
+        $subclass=static::class;
+        if(!isset(self::$instances[$subclass])){
+            self::$instances[$subclass]=new static();
+        }
+        return self::$instances[$subclass];
     }
-
-    public function delete($id){
-        $this->conn->query("DELETE FROM $this->table where id=$id");
-    }
-
-    public function find($id){
-        return $this->conn->query("SELECT * FROM $this->table where id=$id ");
-    }
-
-   public function selectFooter(){
-    return $this->conn->query("SELECT * FROM footersetting");
-    }
-
 }
+    // public function select(){
+//      return    $this->connection->query("SELECT * FROM {$this->tableName}");
+//     }
+
+// //   public function create(){
+// // $this->connection->query("INSERT INTO product(name,price,category,description)VALUES('panir','23000','labaniat','panir ast')");
+        
+// //     }
+
+// //     public function update(){
+// //         $this->connection->query("UPDATE product SET name='mast', price='30000' , category='labaniat' , description='bad ast' WHERE id=1 ");
+// //     }
+
+//     public function delete(){
+//         $this->connection->query("DELETE FROM {$this->tableName} ");
+//          $this->where();
+//     }
+
+
+
+
+// $conn=new mainDb;
+//$conn->select();
+// $conn->create();
+// $conn->update();
+// $conn->delete();

@@ -1,13 +1,18 @@
-<?php 
-$url=$_SERVER["REQUEST_URI"];
-class router{
+<?php
+$url=$_SERVER['REQUEST_URI'];
+// var_dump($url);
+//include("$url");
+//$url=$url."php";
+
+class roater{
     public $url;
     public $urlArray;
-    function __construct($url){
+    public function __construct($url){
         $this->url=$url;
     }
     public function parseUrl(){
-        return $this->urlArray=explode("/",$this->url);
+        $address=$this->urlArray=explode("/",$this->url);
+        //print_r($address);
+        return $address;
     }
 }
-?>

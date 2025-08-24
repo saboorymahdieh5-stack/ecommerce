@@ -1,33 +1,20 @@
-<?php 
-//include('autoload/autoload.php');
-//include("model/factory.php");
-$id=$GLOBALS['urlArray'][3];
-//$conn=$GLOBALS['newFactory']->test("modelProduct");
-$conn=factory::test("modelProduct");
-$result=$conn->find($id);
+<?php
 
-while($product=$result->fetch_assoc()){
-?>
-<div style="width:500px;height:300px;background-color:yellowgreen;margin-top:10px;">
-    <div style="width:100px;height:80px;background-color:green;margin-top:10px;float:left;">
-        <?php echo $product['id']; ?>
-</div>
-<div style="width:100px;height:80px;background-color:green;margin-top:10px;float:left;">
-    <?php echo $product['name'];?>
-</div>
-<div style="width:100px;height:80px;background-color:green;margin-top:10px;float:left;">
-    <?php echo $product['price'];?>
-</div>
-
-<div style="width:100px;height:80px;background-color:green;margin-top:10px;float:left;">
-    <?php echo $product['category'];?>
-</div>
-
-<div style="width:100px;height:80px;background-color:green;margin-top:10px;float:left;">
-    <?php echo $product['description'];?>
-</div>
-<?php 
-}
-?>
-</div>
-
+//include("model/modelProduct.php");
+$id=$GLOBALS['urlArray'][4];
+// $product=factory::factory("product");
+// $category=factory::factory("category");
+$integer=(int)$id;
+$product1=product::where("id",$integer,"=")->get();
+$result1=$product1->fetch_assoc();
+$categoryTitle=category::find($result+
+1["category"]);
+// die($categoryTitle);
+// $result=$categoryTitle->fetch_assoc();
+// var_dump($result1['catgeory']);
+// var_dump($result['category']);
+echo $result1['id']."</br>";
+echo $result1['name']."</br>";
+echo $result1['price']."</br>";
+echo $categoryTitle['title']."</br>";
+echo $result1['description']."</br>";

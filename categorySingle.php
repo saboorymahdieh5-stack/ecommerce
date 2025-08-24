@@ -1,24 +1,13 @@
 <?php 
-//include("autoload/autoload.php");
-//include("model/factory.php");
-$id=$GLOBALS['urlArray'][3];
-//$conn=$GLOBALS['newFactory']->test("modelCategory");
-$conn=factory::test("modelCategory");
-$result=$conn->find($id);
 
-while($category=$result->fetch_assoc()){
+//include("model/modelCategory.php");
+$id=$GLOBALS['urlArray'][4];
+// $category=factory::factory("category");
+$integer=(int)$id;
+$category1=category::find($integer);
+// $result=$category1->fetch_assoc();
+// var_dump($result);
+echo $category1['id']."</br>";
+echo $category1['title']."</br>";
+echo $category1['description']."</br>";
 ?>
-<div style="width:500px;height:200px;background-color:yellowgreen;margin-top:10px;">
-    <div style="width:100px;height:80px;background-color:green;margin-top:10px;float:left;">
-        <?php echo $category['id']; ?>
-</div>
-<div style="width:100px;height:80px;background-color:green;margin-top:10px;float:left;">
-    <?php echo $category['title'];?>
-</div>
-<div style="width:100px;height:80px;background-color:green;margin-top:10px;float:left;">
-    <?php echo $category['description'];?>
-</div>
-<?php 
-}
-?>
-</div>

@@ -1,28 +1,14 @@
-<?php 
-//include('autoload/autoload.php');
-//include("model/factory.php");
-$id=$GLOBALS['urlArray'][3];
-//$conn=$GLOBALS['newFactory']    ->test("modelUser");
-$conn=factory::test("modelUser");
-$result=$conn->find($id);
+<?php
 
-while($user=$result->fetch_assoc()){
-?>
-<div style="width:500px;height:200px;background-color:yellowgreen;margin-top:10px;">
-    <div style="width:100px;height:80px;background-color:green;margin-top:10px;float:left;">
-        <?php echo $user['id']; ?>
-</div>
-<div style="width:100px;height:80px;background-color:green;margin-top:10px;float:left;">
-    <?php echo $user['name'];?>
-</div>
-<div style="width:100px;height:80px;background-color:green;margin-top:10px;float:left;">
-    <?php echo $user['family'];?>
-</div>
-<div style="width:100px;height:80px;background-color:green;margin-top:10px;float:left;">
-    <?php echo $user['phonNumber'];?>
-</div>
-<?php 
-}
-?>
-</div>
+// include("model/modelUser.php");
+$id=$GLOBALS['urlArray'][4];
+// $user=factory::factory("user");
+$integer=(int)$id;
+$user1=user::find($integer);
+// $result=$user1->fetch_assoc();
+echo $user1['id']."</br>";
+echo $user1['name']."</br>";
+echo $user1['family']."</br>";
+echo $user1['phonNumber']."</br>";
 
+?>

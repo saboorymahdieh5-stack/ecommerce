@@ -1,28 +1,24 @@
 <?php 
-//include('autoload/autoload.php');
-//include("model/factory.php");
-$id=$GLOBALS['urlArray'][3];
-//$conn=$GLOBALS['newFactory']->test("modelFooter");
-$conn=factory::test("modelFooter");
-$result=$conn->find($id);
 
-while($footer=$result->fetch_assoc()){
-?>
-<div style="width:500px;height:200px;background-color:yellowgreen;margin-top:10px;">
-    <div style="width:100px;height:80px;background-color:green;margin-top:10px;float:left;">
-        <?php echo $footer['id']; ?>
+$id=$GLOBALS['urlArray'][4];
+// $modelFooter=factory::factory("footer");
+$integer=(int)$id;
+$result=footer::find($integer);
+// while($footer=$result->fetch_assoc()){   ?>
+<div>
+<div>
+    <?php echo $result['id'];?>
 </div>
-<div style="width:100px;height:80px;background-color:green;margin-top:10px;float:left;">
-    <?php echo $footer['nameDesigner'];?>
+<div>
+    <?php echo $result['nameDesigner'];?>
 </div>
-<div style="width:100px;height:80px;background-color:green;margin-top:10px;float:left;">
-    <?php echo $footer['phonNumber'];?>
+<div>
+    <?php echo $result['phonNumber'];?>
 </div>
-<div style="width:100px;height:80px;background-color:green;margin-top:10px;float:left;">
-    <?php echo $footer['description'];?>
+<div>
+    <?php echo $result['description'];?>
 </div>
 <?php 
-}
+// }
 ?>
 </div>
-

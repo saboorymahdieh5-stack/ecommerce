@@ -1,4 +1,5 @@
 <?php
+
 class loadFile{
     public function loadFile($addres){
         $addres=$addres .".php";
@@ -10,4 +11,3 @@ class loadFile{
 
     }
 }
-?>

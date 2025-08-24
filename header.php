@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html>
+<head>
+</head>
 <body>
     <div style="
         height:             715px;
@@ -10,52 +12,43 @@
         width:              100%;
         ">
         <div style="    
-            background-color:       #800000;
-            width:                  100%; 
-            width:                  100%;
-            display:                flex;
-            justify-content:        space-between;
-            align-items:            center;
+            background-color:       #CE93DB;
+            
             ">
-            <a href="http://localhost/ecommerce/productForm" 
+            <a href="http://localhost/tamrinb/ecommerce1/productForm/" 
             style="
-                background-color:       #B80F0A;
-                color:                  white;
-                text-decoration:        none;
+                width:100px;height:50px;background-color:#EA63CB;float:left;margin-top:10px;margin-left:10px;margin-right:10px;color:white;
                 ">
                 product form 
             </a>
-            <a href="http://localhost/ecommerce/productList"
+            <a href="http://localhost/tamrinb/ecommerce1/productList/page/1"
             style="
-                background-color:       #B80F0A;
-                color:                  white;
-                text-decoration:        none;
+                width:100px;height:50px;background-color:#EA63CB;float:left;margin-top:10px;margin-left:10px;margin-right:10px;color:white;
                 ">
                 product list 
             </a>
-            <a href="http://localhost/ecommerce/categoryForm" style="width:100px;height:50px;background-color:#B80F0A;float:left;margin-top:10px;margin-left:10px;margin-right:10px;color:white
-                text-decoration:        none;">
+            <a href="http://localhost/tamrinb/ecommerce1/categoryForm" style="width:100px;height:50px;background-color:#EA63CB;float:left;margin-top:10px;margin-left:10px;margin-right:10px;color:white;">
                 category form 
             </a>
-            <a href="http://localhost/ecommerce/categoryList" style="width:100px;height:50px;background-color:#B80F0A;float:left;margin-top:10px;margin-left:10px;margin-right:10px;color:white
-                text-decoration:        none;">
+            <a href="http://localhost/tamrinb/ecommerce1/categoryList" style="width:100px;height:50px;background-color:#EA63CB;float:left;margin-top:10px;margin-left:10px;margin-right:10px;color:white;">
                 category list
             </a>
-            <a href="http://localhost/ecommerce/userForm" style="width:100px;height:50px;background-color:#B80F0A;float:left;margin-top:10px;margin-left:10px;margin-right:10px;color:white
-                text-decoration:        none;">
+            <a href="http://localhost/tamrinb/ecommerce1/userForm" style="width:100px;height:50px;background-color:#EA63CB;float:left;margin-top:10px;margin-left:10px;margin-right:10px;color:white;">
                 user form
             </a>        
-                <a href="http://localhost/ecommerce/userList" style="width:100px;height:50px;background-color:#B80F0A;float:left;margin-top:10px;margin-left:10px;margin-right:10px;color:white
-                text-decoration:        none;">
+                <a href="http://localhost/tamrinb/ecommerce1/userList" style="width:100px;height:50px;background-color:#EA63CB;float:left;margin-top:10px;margin-left:10px;margin-right:10px;color:white;">
                 user list
             </a>
-            <a href="http://localhost/ecommerce/footerForm" style="width:100px;height:50px;background-color:#B80F0A;float:left;margin-top:10px;margin-left:10px;margin-right:10px;color:white
-                text-decoration:        none;">
-                footer 
-            </a>        
-            <a href="http://localhost/ecommerce/footerList" style="width:100px;height:50px;background-color:#B80F0A;float:left;margin-top:10px;margin-left:10px;margin-right:10px;color:white
-                text-decoration:        none;">
+            <a href="http://localhost/tamrinb/ecommerce1/footerList" style="width:100px;height:50px;background-color:#EA63CB;float:left;margin-top:10px;margin-left:10px;margin-right:10px;color:white;">
                 footer list
             </a>
+             <a href="http://localhost/tamrinb/ecommerce1/footerForm" style="width:100px;height:50px;background-color:#EA63CB;float:left;margin-top:10px;margin-left:10px;margin-right:10px;color:white;">
+                footer Form
+            </a>
+            
         </div>
+       
+       
+    
+
 

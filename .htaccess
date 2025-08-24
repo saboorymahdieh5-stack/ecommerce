@@ -1,6 +1,6 @@
 RewriteEngine On
-RewriteBase /ecommerce/
+RewriteBase /tamrinb/ecommerce1/
 RewriteRule ^index\\.php$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /ecommerce/index.php [L]
+RewriteRule . /tamrinb/ecommerce1/index.php [L]
