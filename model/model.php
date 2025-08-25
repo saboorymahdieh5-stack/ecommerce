@@ -45,9 +45,9 @@ class model extends mainDb{
        // $product=new 
        $b->count.=",(";
        $o.=$b->select(["COUNT(*)"])->from("product")->where("product.category","=","category.id");
+      //  var_dump($b);
        $o.=")$key";
        $b->count .=$o;
-      //  var_dump($b->count);
             // var_dump($b->count);
             // var_dump($u);
 
@@ -434,6 +434,7 @@ class model extends mainDb{
           // $sql= $b->render();
           var_dump($x->query);
           // die();
+          // var_dump($x->query);
           
           return self::$connection->query($x->query);
           
