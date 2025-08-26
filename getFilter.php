@@ -20,11 +20,13 @@ while($row=$result->fetch_assoc()){
 <?php
 }
 }else{
-$result1=category::select(["id","name","description"])->where(["pro_count"=>["name","category"]])->subCount("product","pro_count")->from("category")->having(["product.name"],0)->get();
+$result1=category::select(["*"])->count1(product::class,"pro_count");
+// var_dump($result1);
+// die();
 while($row1=$result1->fetch_assoc()){
-// var_dump($row1);
+var_dump($row1);        
 if($row1["pro_count"]==0){
-    ec+ho $row1['id'];
+    echo $row1['id'];
     echo $row1['name'];
     echo $row1['description'];
 

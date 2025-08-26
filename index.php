@@ -8,5 +8,5 @@ $factory=new factory;
 $loadFile=$factory->factory("loadFile");
 var_dump($loadFile);
 $loadFile->loadFile('header');
-$loadFile->loadFile($urlArray[3]);
+$loadFile->loadFile($urlArray[2]);
 $loadFile->loadFile("footer");

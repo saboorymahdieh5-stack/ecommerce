@@ -5,22 +5,22 @@
 //$connection->query("UPDATE product SET name='mast', price='30000' , category='labaniat' , description='bad ast' WHERE id=1 ");
 
 class mainDb{
-    public static $connection;
-    protected static $table;
-    public static $instances=[];
+    public $connection;
+    protected  $table;
+    public  $instances=[];
     // public static function __construct(){
     //     $this->connection=new mysqli("localhost","root","","ecommerce1");
     // }
-    public static function getObj(){
-       return self::$connection=new mysqli("localhost","root","","ecommerce1");
+    protected  function getObj(){
+       return $this->connection=new mysqli("localhost","root","","ecommerce1");
     }
-    public static function getInstance(){
-        $subclass=static::class;
-        if(!isset(self::$instances[$subclass])){
-            self::$instances[$subclass]=new static();
-        }
-        return self::$instances[$subclass];
-    }
+    // public static function getInstance(){
+    // //     $subclass=static::class;
+    // //     if(!isset(self::$instances[$subclass])){
+    // //         self::$instances[$subclass]=new static();
+    // //     }
+    // //     return self::$instances[$subclass];
+    // // }
 }
     // public function select(){
 //      return    $this->connection->query("SELECT * FROM {$this->tableName}");

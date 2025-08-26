@@ -1,113 +1,86 @@
 <?php 
 
-class model extends mainDb{
+class model extends facade{
   public $join;
-   public static $table;
-    public static $having;
+  public $type;
+  public $group;
+   public  $table;
+    public  $having;
     public $orderby;
-    public static $null;
-    public static $middle;
-    public  $count;
+    public  $null;
+    public  $middle;
+    public  $count = '';
     public  $right;
     public  $from;
-    public static $result;
+    public  $result;
     public  $query;
     public  $where;
     public $sql;
-    public static $fields;
-    public static $fieldValue;
-    public static $base;
-    public static $limit;
-    public static $offset;
+    public  $fields;
+    public  $fieldValue;
+    public  $base;
+    public  $limit;
+    public $offset;
     public  $pagenet;
 
-     public static function join(string $table){
+     protected function join(string $table){
       // foreach($fields as $key=>$value){
-     $b=static::getInstance();
+    //  $b=static::getInstance();
 
       // self::$type="join";
-     $b->right = " INNER " . " JOIN ". $table ;
-     static::where("product.category","=","category.id");
-     $b->right.=" GROUP BY category.id".$b->pagenet;
+     $this->join = " LEFT " . " JOIN ". $table ;
+     $this->where("product.category","=","category.id");
+    //  static::group();
+    //  $b->join.=" GROUP BY category.id";
       // }
-     $m=$query.=self::$right;
+    //  $b->query.=$b->join;
     //  $o.=self::$right;
-    //  var_dump($m);
+    //  var_dump($b->query);
     //  die();
-     return $b;
+     return $this;
 
     }
-      public static function subCount($object,string $key){
-       $b=$object::getInstance();
-      
-       // die();
-       $o='';
-       // $product=new 
-       $b->count.=",(";
-       $o.=$b->select(["COUNT(*)"])->from("product")->where("product.category","=","category.id");
-      //  var_dump($b);
-       $o.=")$key";
-       $b->count .=$o;
-            // var_dump($b->count);
-            // var_dump($u);
+ protected function group(){
+     $b=static::getInstance();
+     $b->group=" GROUP BY category.id";
 
-            // die();
-        // if($table=='product'){
-          // var_dump($p);
-          // die();
-          // self::$table=$table;
-          // $m=product::class;
-          // var_dump($m);
-          // die();
-          // self::$count.=",(".$table::select(["COUNT(*)"]).$table::from().$table::where();
-          // $table::$count.=")$key";
-          // }
-          // $p=self::$query.=$table::$count;
-          // foreach($fields as $key=>$value){
-            // $object=new $table[0];
-            // $table::$type="subCount";
-            //  static::where("product.category","=","category.id");
-            // self::$count=" , ( "." SELECT " . " COUNT(*) " . " FROM " . $table .")$key"; 
-            // die();
-            // self::$count=",(";
-            // var_dump($object);
-            // $object->select(["COUNT(*)"]);
-            // $object->from();
-            // $object->where("product.category","=","category.id");
-            // self::$count.=")$key";
-            // die();
-            // $v = "(" . self::$count . ")"
-            // echo "acbkj";
-            // }
-            // var_dump( self::$count);
-            // die();
-            // $p.=self::$orderby;
-            // return $p=factory::getInstance(static::$table);
-            // var_dump($p);
+ }
 
+ protected function count1( $product,$key){
+     $k=static::getInstance();
+   $obj=$product::getInstance();
+  $b = '';
+   $m=$obj->query;
+   $b= $obj->select(["COUNT(*)"])->from("product")->where("product.category","=","category.id")->render();
+   $obj->count .= ",( " .$b." ) "."$key";
+  // $t=$k->having(["pro_count"],0);
+    // $t=$k->orderBy("pro_count");
+  // var_dump($t);
+  $m=$k->query.=$obj->count." FROM "." category ";
+  $p=$k->get();
+  return $p;
+ }
 
-    }
-    // public static function belongsTo(string $table,array $fields){
-    //    foreach($fields as $key=>$value){
-    //     self::$middle=",("." SELECT ". "*" ." FROM ". $table ." WHERE ".implode("=",static::$related[$table]).")$key ";
-    //  }
-    // }
-    public function orderBy($value){
+    protected function orderBy($value){
     //  $b=factory::getInstance(static::$table);
      $b=static::getInstance();
 
 
       $b->orderby=" ORDER BY ". "price  "  . $value ;
-     $b->query.=$b->orderby;
+    //  $b->query.=$b->orderby;
      return $b;
     }
 
-    public static function null(array $name,$key ){
-     self::$null=" , "." COALESCE "." ( ".$name[0]." , "."'بدون محصول'"." ) ".$key;
-     self::$query.=self::$null;
-    //  $o.=self::$right;
-     return factory::getInstance(static::$table);
-
+    protected function null(array $name,$key ){
+     $b=static::getInstance();
+     $b->null=" , "." COALESCE "." ( ".$name[0]." , "."'بدون محصول'"." ) ".$key;
+     return $b;
+    }
+    protected  function resultNull(){
+     $b=static::getInstance();
+     $m=$b->null(["product.name"],"pro_name")->from("category")->join("product");
+     $b->query.=$b->null;
+       return $b;
     }
       //  public static function select(array $fields = ["*"]){
       //   self::$fields = implode(' , ',$fields);
@@ -115,7 +88,7 @@ class model extends mainDb{
       //   self::$query = "SELECT " . self::$fields . " FROM " . static::$table ; 
       //   return self::makeObj();
       // }
-      public static function case(string $name , array $list,string $not){
+      protected function case(string $name , array $list,string $not){
         self::$query.=", CASE ".$name;
         foreach($list as $key=>$value){
         self::$query.=  " WHEN " .$key ." THEN '$value'";
@@ -125,47 +98,36 @@ class model extends mainDb{
 
 
     }
-    public static function having(array $name,int $number){
-     self::$having=" HAVING ".$name[0]."=".$number;
-     return $b=static::getInstance();
+    protected function having(array $name,int $number){
+      $b=static::getInstance();
+      var_dump($b);
+
+     $b->having=" HAVING ".$name[0]."=".$number;
+     return $b->having;
 
 
     }
-      public static function select(array $fields=["*"]){
-     $b=static::getInstance();
-
-        // echo "lkjhg";
-        // var_dump($b);
-        self::$fields=implode(',',$fields);
-        $b->query =" SELECT ". self::$fields;
-        // var_dump(self::$query);
-        // echo "dyxuch"; 
-        return $b;
+      protected  function select(array $fields){
+        $this->type='select';
+        $this->fields=implode(',',$fields);
+        $this->query =" SELECT ". $this->fields;
+    
+        return $this;
       }
-      public function from(string $table){
-     $b=static::getInstance();
-
-
-        $b->from=" FROM ". $table;
-      $b->query.=$b->from;
-        return $b;
+      protected function from(){
+        echo "jkcsn";
+        $this->from=" FROM ". $this->table;
+      // $b->query.=$b->from;
+      var_dump($this->table);
+      // die();+
+        return $this;
       }
-       public static function with(string $table){
-        // var_dump($table);
-      //  $b=factory::getInstance(static::$table);
-     $b=static::getInstance();
-
-
-        $b->select(["*"])->subCount(product::class,"pro_count")->from("category")->orderBy("pro_count")->join($table);
-        // $r=product::class;
-        // static::select(["*"]);
-        //  $table->subCount("pro_count");
-        //  $r->from("category");
-        //  static::orderBy("proCount");
-
+       protected function with(string $table){
+       $b=static::getInstance();
+        $b->select(["*"])->from("product")->join($table)->render();
        return $b;
       }
-        public static function result(){
+        protected function result(){
         self::$result=" FROM ". static::$table;
         $y=self::$middle.=self::$result;
         self::$query.=$y;
@@ -176,28 +138,33 @@ class model extends mainDb{
         // die();
         return $b->get();
       }
-     public static function pagenet(int $limit){
+     protected function pagenet(int $limit){
       //  $b=factory::getInstance(static::$table);
      $b=static::getInstance();
-
-
-      $page=$GLOBALS['urlArray'][5];
+      $page=$GLOBALS['urlArray'][4];
       $offset=($page-1)*$limit;
       $b->pagenet=" LIMIT " . $limit . " OFFSET " . $offset ;
       $b->query.=$b->pagenet;
       return $b;
    }
 
-    public static function first(array $fields=["*"]){
-      if(empty(self::$query="")){
-    self::$fields=implode(',',$fields);
-    self::$query=" SELECT ". self::$fields . " FROM " . static::$table ;
+    protected function first($args){
+      // $b=static::getInstance();
+      // var_dump($b);
+      // die();
+      if(empty($this->query="")){
+    $this->fields=implode(',',$args);
+    // var_dump($b->fields);
+    // die();
+    $this->query=" SELECT ". $this->fields . " FROM " .$this->table ;
       }
-    return  $b=static::getInstance();
+    return  $this;
 
    }
 
-      public static function create($data){
+      protected function create($data){
+     $b=static::getInstance();
+       $b->type='create';
         foreach($data as $key=>$value){
          $field[]=$key;
         $fieldValue[]=$value;
@@ -210,20 +177,25 @@ class model extends mainDb{
         return self::get();
       }
     
-      public static function find($id){
-        self::$query="SELECT"."*"." FROM ".static::$table." WHERE " ."id". "=" . $id;
-        $result=self::get();
+      protected function find($id){
+     $b=static::getInstance();
+        $b->query="SELECT"."*"." FROM ".static::$table." WHERE " ."id". "=" . $id;
+        $result=static::get();
         return $result->fetch_assoc();
       }
       
       
-      public static function delete($id){
+      protected function delete($id){
+     $b=static::getInstance();
+      $b->type='delete';
         self::$query=" DELETE ". " FROM " . static::$table . " WHERE " . "id" . "=". $id;
         self::get();
       }
 
       
-      public static function update($data,$id){
+      protected function update($data,$id){
+     $b=static::getInstance();
+     $b->type='update';
         $m=1;
         foreach($data as $key=>$value){
           self::$base.=$key."='".$value."'";
@@ -243,46 +215,21 @@ class model extends mainDb{
       }
 
 
-      public static  function where(string $field,string $operator="=" ,string $value){
+      protected  function where(string $field,string $operator="=" ,string $value){
      $b=static::getInstance();
-
-
-        // foreach($fields as $key=>$value){
-        //     $l=implode("=",static::$related[$value[1]]);
-        // }
+        $b->where=[];
         $b->where[]="$field $operator $value";
-        // die();  
-        // foreach(self::$where as $value){
-          
-          $implode = implode($operator , $b->where);
-          // var_dump($implode);
-        // }
-        // var_dump(self::$where);
-
-        if($b->join){
-          echo"k";  
-          $b->right.=" ON ".$implode;
-        }
-        // self::$where=[];
-        // die();
-        // if(self::$query==""){
-          // static::select();
-          // self::$query.= " WHERE " . $l;
-          // self::$where=" WHERE ".$l;
-          //   if(!in_array(self::$type,["select","update","delete","from"])){
-          //       echo "hihboonlkib";
-          // }
           return $b;
       }
         
-        public  static function limit( int $start ){
+        protected function limit( int $start ){
           self::$limit = " LIMIT " . $start ;
           self::$query.=self::$limit;
            return $b=static::getInstance();
 
         }
         
-        public static function offset(int $offset){
+        protected function offset(int $offset){
           self::$offset = " OFFSET " . $offset;
           self::$query.=self::$offset;
           self::$query.=";";
@@ -290,7 +237,7 @@ class model extends mainDb{
 
         }
         
-   public static function getPrice($from,$to){
+   protected function getPrice($from,$to){
     $from=$from;
     $to=$to;
     if($from>$to){
@@ -348,7 +295,7 @@ class model extends mainDb{
   return $products;
   }
 
-        public static function sort($value,$string){
+    protected function sort($value,$string){
           $value=$value;
           $string=$string;
         //  $p=factory::getInstance(static::$table);
@@ -389,54 +336,67 @@ class model extends mainDb{
   return $values;
 
         }
-        public static function count(){
-          self::$query="SELECT count(*) FROM " . static::$table;
+    protected function count(){
+          $b=static::getInstance();
+
+          $b->query="SELECT count(*) FROM " . static::$table;
           // $x=factory::getInstance(static::$table);
-     $b=static::getInstance();
 
           return $b->get();
         }
-         public static function render(){
-          //  $x=factory::getInstance(static::$table);
-     $b=static::getInstance();
+    protected function render(){
+    //  var_dump($b);
+     
+    //  if(!in_array($b->type,["create","update"])){
+    //    //  echo "gjsa,v";
+    //    //  $b->from('category');
+    //    $b->query.= $b->from;
+    //    //  var_dump($b->query);
+    //    $b->from='';
+    //   }
+    if($this->from){
+     $this->query.=$this->from;
+     // echo "efs";
+     $this->from='';
+    }
+    if($this->orderby){
+      $this->query.=$this->orderby;
+      // var_dump($b->query);
+      }
 
-           $sql=$b->query;
-           if(isset($b->count)){
-            $sql.=$b->count;
-            $x->count = '';
-           }
-        //  if(isset(self::$result)){
-        //   $p=self::$query.=self::$middle;
-        //   $p.=self::$result;
-        //  }
-        //  if(!in_array(static::$type,['create','update'])){
-        //   $x->select()->from();
-        //   self::$from="";
-        //  }
-        // if(isset(self::$limit)){
-        //   self::$query.=self::$limit;
-        //   self::$limit="";
-        // }
-        // if(isset(self::$offset)){
-        //   self::$query.=self::$offset;
-        //   self::$offset="";
-        // }
-        // if(!in_array(self::$type,['where'])){
+  if($this->join){
+    $m=$this->join.=" ON ".implode(",",$this->where);
+    $this->query.=$m;
+    $this->join='';
+    $this->where=[];
+    // var_dump($b->query);
 
-        // }
-        // return $x;
+  }
+     if($this->where && !$this->join){
+      $this->query.=" WHERE ".implode(",",$this->where);
+      // $m.=" WHERE ".implode(",",$b->where);
+     }
+     
+    //  var_dump($b->query);
+      if($b->group){
+       $b->query.=$b->group;
+       $b->group='';
+      }
+      if($b->having){
+        $b->query.=$b->having;
+      }
+      // if($b->null){
+      //   $b->query.=$b->null;
+      //   // $b->query='';
+      // //  var_dump($b->query);
+      // }
+      return $b->query;
          }
-        public static function get(){  
-          self::getObj();
-          // $x=factory::getInstance(static::$table);
-     $b=static::getInstance();
-
-          // $sql= $b->render();
-          var_dump($x->query);
-          // die();
-          // var_dump($x->query);
-          
-          return self::$connection->query($x->query);
+        protected  function get(){  
+        $this->getObj();
+          $sql= $this->render();
+          var_dump($sql);
+          return $this->connection->query($sql);
           
         }
 
