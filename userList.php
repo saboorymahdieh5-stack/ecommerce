@@ -1,7 +1,7 @@
 <?php 
 
 // $user=factory::factory("user");
-$result=user::select(["id","name","family","phonNumber"])->get();
+$result=user::select("*")->from()->get();
 // var_dump($userModel);
 ?>
 <div>
@@ -22,13 +22,13 @@ for($i=1;$i<=$result->num_rows;$i++){
 <div>
     <?php echo $user['phonNumber'];?>
 </div>
-<a href="http://localhost/tamrinb/ecommerce1/deleteUser/<?php echo $user['id']?>">
+<a href="http://localhost/ecommerce/deleteUser/<?php echo $user['id']?>">
  حذف
  </a>
- <a href="http://localhost/tamrinb/ecommerce1/userSingle/<?php echo $user['id']?>">
+ <a href="http://localhost/ecommerce/userSingle/<?php echo $user['id']?>">
 نمایش
  </a>
- <a href="http://localhost/tamrinb/ecommerce1/editUser/<?php echo $user['id']?>">
+ <a href="http://localhost/ecommerce/editUser/<?php echo $user['id']?>">
  ویرایش
  </a>
  <?php 

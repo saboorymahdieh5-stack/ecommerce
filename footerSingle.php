@@ -1,6 +1,6 @@
 <?php 
 
-$id=$GLOBALS['urlArray'][4];
+$id=$GLOBALS['urlArray'][3];
 // $modelFooter=factory::factory("footer");
 $integer=(int)$id;
 $result=footer::find($integer);

@@ -1,27 +1,19 @@
 <?php
 
 class footer extends model{
-    protected static $table="footer";
+    public $table="footer";
 
-     public static function updateOrCreate($data){
-        $count=self::countFooter();
-        $nameDesigner=$data['nameDesigner'];
-        $phonNumber=$data['phonNumber'];
-        $description=$data['description'];
-        
-        
-        
+    protected function updateOrCreate($data){
+        $count=$this->countFooter();   
         if($count==0){
-            self::create($data);
+            $this->create($data);
         }
         if($count==1){
-            $result=self::select(["id"]);
-            $id = $result->fetch_assoc()["id"];
-            self::update($data,$id);
+         $this->update($data);
     }
     }
-    public static function countFooter(){
-        $result=self::select(["id","nameDesigner","phonNumber","description"]);
+    protected function countFooter(){
+        $result=$this->select(["*"])->from()->get();
         return $result->num_rows;
 
     }

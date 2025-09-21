@@ -1,8 +1,5 @@
 <?php
-
-// $modelFooter=factory::factory("footer");
-$result=footer::select(["id","nameDesigner","phonNumber","description"])->from()->get();
-// var_dump($result);
+$result=footer::select("*")->from()->get();
 ?>
 <div style="width:1300px;height:400px;margin-top:10px;margin-left:10px;">
  <?php   while($footer=$result->fetch_assoc()){ ?>
@@ -25,13 +22,13 @@ $result=footer::select(["id","nameDesigner","phonNumber","description"])->from()
             <div style="width:100px;height:20px;background-color:#F9A602;margin-top:10px;margin-left:10px;float:left;">
             <?php echo $footer['description']; ?>
  </div>
- <a href="http://localhost/tamrinb/ecommerce1/deleteFooterForm/<?php echo $footer['id']?>" style=" width:80px;height:20px;background-color:#DBA520;margin-top:10px;margin-left:10px;float:left;">
+ <a href="http://localhost/ecommerce/deleteFooterForm/<?php echo $footer['id']?>" style=" width:80px;height:20px;background-color:#DBA520;margin-top:10px;margin-left:10px;float:left;">
  حذف
  </a>
- <a href="http://localhost/tamrinb/ecommerce1/footerSingle/<?php echo $footer['id']?>" style=" width:80px;height:20px;background-color:#DBA520;margin-top:10px;margin-left:10px;float:left;">
+ <a href="http://localhost/ecommerce/footerSingle/<?php echo $footer['id']?>" style=" width:80px;height:20px;background-color:#DBA520;margin-top:10px;margin-left:10px;float:left;">
 نمایش
  </a>
- <a href="http://localhost/tamrinb/ecommerce1/editFooterForm/<?php echo $footer['id']?>" style=" width:80px;height:20px;background-color:#DBA520;margin-top:10px;margin-left:10px;float:left;">
+ <a href="http://localhost/ecommerce/editFooterForm/<?php echo $footer['id']?>" style=" width:80px;height:20px;background-color:#DBA520;margin-top:10px;margin-left:10px;float:left;">
  ویرایش
  </a>
 

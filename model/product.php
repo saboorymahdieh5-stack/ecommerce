@@ -1,8 +1,16 @@
 <?php
 class product extends model{
-  public static $table="product";
-  // public static $related=["category"=>[" product.category "," category.id "],"b"=>["s","s1"]];
-  // public static function category(array $fields){
-  //   static::belongsTo(category::class,$fields);
-  // }
+  public  $table="product";
+
+  public $fillable=[
+    "product_id"=>"id",
+    "product_name"=>"name",
+    "product_price"=>"price",
+    "product_category"=>"category",
+    "product_description"=>"description"
+  ];
+  // public  $related=["category"=>[" product.category "," category.id "]];
+  protected function category($args){
+   return $this->belongsTo("category",$args);
+  }
 }

@@ -7,5 +7,7 @@
 // $modelFooter=factory::factory("footer");
 // var_dump($_POST);
 // $integer=(int)$id;
+// var_dump($_POST);
+// die();
 $result=footer::updateOrCreate($_POST);
 ?>

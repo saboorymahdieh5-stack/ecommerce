@@ -1,6 +1,6 @@
 <?php 
-$id=$GLOBALS['urlArray'][4];
-// $modelFooter=factory::factory("footer");
+$id=$GLOBALS['urlArray'][3];
 $integer=(int)$id;
-footer::delete($integer);
+footer::where("id","=",$integer)->delete($integer);
+
 ?>

@@ -1,7 +1,7 @@
 <?php
 
 // include("model/modelUser.php");
-$id=$GLOBALS['urlArray'][4];
+$id=$GLOBALS['urlArray'][3];
 // $user=factory::factory("user");
 $integer=(int)$id;
 $user1=user::find($integer);

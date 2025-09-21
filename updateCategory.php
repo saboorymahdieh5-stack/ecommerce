@@ -1,8 +1,6 @@
 <?php 
-// $_POST["id"]=$GLOBALS['urlArray'][4];
-$id=$GLOBALS['urlArray'][4];
-// $category=factory::factory("category");
+$id=$GLOBALS['urlArray'][3];
 $integer=(int)$id;
-// var_dump($integer);
-category::update($_POST,$integer);
+category::where("id","=",$id)->update($_POST);
+
 ?>
