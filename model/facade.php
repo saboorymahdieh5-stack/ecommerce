@@ -5,6 +5,6 @@ public static function __callStatic($method,$args){
     return (new static)->$method($args);
 }
 public function __call($method,$args){
-return $this->$method();
+return $this->$method($args);
 }
 }

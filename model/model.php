@@ -1,239 +1,194 @@
 <?php 
 
 class model extends facade{
-  public $join;
-  public $type;
-  public $group;
-   public  $table;
-    public  $having;
-    public $orderby;
-    public  $null;
-    public  $middle;
-    public  $count = '';
-    public  $right;
-    public  $from;
-    public  $result;
-    public  $query;
-    public  $where;
-    public $sql;
-    public  $fields;
-    public  $fieldValue;
-    public  $base;
-    public  $limit;
-    public $offset;
-    public  $pagenet;
+   public $update;
+   public $join;
+   public $type;
+   public $group;
+   public $table;
+   public $having;
+   public $orderby;
+   public $null;
+   public $to;
+   public $count = '';
+   public $right;
+   public $from;
+   public $result;
+   public $query;
+   public $where;
+   public $sql;
+   public $fields;
+   public $fieldValue;
+   public $base;
+   public $limit;
+   public $offset;
+   public $pagenet;
 
-     protected function join(string $table){
-      // foreach($fields as $key=>$value){
-    //  $b=static::getInstance();
-
-      // self::$type="join";
-     $this->join = " LEFT " . " JOIN ". $table ;
-     $this->where("product.category","=","category.id");
-    //  static::group();
-    //  $b->join.=" GROUP BY category.id";
-      // }
-    //  $b->query.=$b->join;
-    //  $o.=self::$right;
-    //  var_dump($b->query);
-    //  die();
-     return $this;
+     protected function join($field){
+        $this->join = " INNER   " . " JOIN ". $field[0];
+        $this->where(["product.category","=","category.id"]);
+        return $this;
 
     }
- protected function group(){
-     $b=static::getInstance();
-     $b->group=" GROUP BY category.id";
+  protected function group(){
+     $this->group=" GROUP BY category.id";
 
  }
 
- protected function count1( $product,$key){
-     $k=static::getInstance();
-   $obj=$product::getInstance();
-  $b = '';
-   $m=$obj->query;
-   $b= $obj->select(["COUNT(*)"])->from("product")->where("product.category","=","category.id")->render();
-   $obj->count .= ",( " .$b." ) "."$key";
-  // $t=$k->having(["pro_count"],0);
-    // $t=$k->orderBy("pro_count");
-  // var_dump($t);
-  $m=$k->query.=$obj->count." FROM "." category ";
-  $p=$k->get();
+ protected function count1($key){
+  $product=factory::factory("product");
+  $b = ''; 
+  $b= $product->select(["COUNT(*)"])->from()->where(["product.category","=","category.id"])->render();
+  $product->count .= ",( " .$b." ) "."$key[0]";
+  // $this->having("pro_count",0);
+  $t=$this->orderBy(["pro_count"]);
+  $m=$this->query.=$product->count." FROM "." category ".$this->orderby;
+  // var_dump($m);
+  // die();
+  $p=$this->get();
   return $p;
  }
 
     protected function orderBy($value){
-    //  $b=factory::getInstance(static::$table);
-     $b=static::getInstance();
-
-
-      $b->orderby=" ORDER BY ". "price  "  . $value ;
-    //  $b->query.=$b->orderby;
-     return $b;
+     $this->orderby=" ORDER BY ". $value[0]  . " ASC " ;
+     return $this;
     }
 
-    protected function null(array $name,$key ){
-     $b=static::getInstance();
-     $b->null=" , "." COALESCE "." ( ".$name[0]." , "."'بدون محصول'"." ) ".$key;
-     return $b;
+    protected function null($name,$key){
+     $this->null=" , "." COALESCE "." ( ".$name." , "."'بدون محصول'"." ) ".$key;
+     return $this;
     }
     protected  function resultNull(){
-     $b=static::getInstance();
-     $m=$b->null(["product.name"],"pro_name")->from("category")->join("product");
-     $b->query.=$b->null;
-       return $b;
+     $m=$this->null("product.name","pro_name")->from()->join("product");
+     $this->query.=$this->null;
+       return $this;
     }
-      //  public static function select(array $fields = ["*"]){
-      //   self::$fields = implode(' , ',$fields);
-      //   self::$query=="";
-      //   self::$query = "SELECT " . self::$fields . " FROM " . static::$table ; 
-      //   return self::makeObj();
-      // }
+
       protected function case(string $name , array $list,string $not){
-        self::$query.=", CASE ".$name;
-        foreach($list as $key=>$value){
-        self::$query.=  " WHEN " .$key ." THEN '$value'";
+        $this->query.=", CASE ".$name;
+        foreach($list[0] as $key=>$value){
+        $this->query.=  " WHEN " .$key ." THEN '$value'";
        }
-      self::$query.=" ELSE '$not'"." END "."product_point";
-     return  $b=static::getInstance();
+      $this->query.=" ELSE '$not'"." END "."product_point";
+     return  $this;
 
 
     }
-    protected function having(array $name,int $number){
-      $b=static::getInstance();
-      var_dump($b);
-
-     $b->having=" HAVING ".$name[0]."=".$number;
-     return $b->having;
-
-
+    protected function having($name,int $number){
+     $this->having=" HAVING ".$name."=".$number;
+     return $this->having;
     }
-      protected  function select(array $fields){
+
+    protected function select($field){
         $this->type='select';
-        $this->fields=implode(',',$fields);
+        $this->fields=implode(',',$field);
         $this->query =" SELECT ". $this->fields;
-    
         return $this;
       }
-      protected function from(){
-        echo "jkcsn";
-        $this->from=" FROM ". $this->table;
-      // $b->query.=$b->from;
-      var_dump($this->table);
-      // die();+
+    protected function from(){
+        $this->from="  FROM  ". $this->table;
         return $this;
       }
-       protected function with(string $table){
-       $b=static::getInstance();
-        $b->select(["*"])->from("product")->join($table)->render();
-       return $b;
-      }
-        protected function result(){
-        self::$result=" FROM ". static::$table;
-        $y=self::$middle.=self::$result;
-        self::$query.=$y;
-        // $n=factory::getInstance(static::$table);
-     $b=static::getInstance();
+    protected function belongsTo( $table , $field){
+  
+      foreach($this->fillable as $key=>$value){
+      $result[]=$this->table.".".$value." $key ";
+    }
+    // $result=[];
+    foreach($field as $key=>$value){
+      $result[]=$table.".".$value." ".$table."_".$value;
+    }
+    // var_dump($result);
+    return $this->select($result)->from()->join([$table]);
 
-        // var_dump($n);
-        // die();
-        return $b->get();
+    }
+    
+    protected function with($field){
+        $this->select($field[0])->from()->join($field[1]);
+       return $this;
       }
+    // protected function result(){
+    //     self::$result=" FROM ". static::$table;
+    //     $y=self::$middle.=self::$result;
+    //     self::$query.=$y;
+    //  $b=static::getInstance();
+    //     return $b->get();
+    //   }
      protected function pagenet(int $limit){
-      //  $b=factory::getInstance(static::$table);
-     $b=static::getInstance();
+    //  $b=static::getInstance();
       $page=$GLOBALS['urlArray'][4];
       $offset=($page-1)*$limit;
-      $b->pagenet=" LIMIT " . $limit . " OFFSET " . $offset ;
-      $b->query.=$b->pagenet;
-      return $b;
+      $this->pagenet=" LIMIT " . $limit . " OFFSET " . $offset ;
+      $this->query.=$this->pagenet;
+      return $this;
    }
 
-    protected function first($args){
-      // $b=static::getInstance();
-      // var_dump($b);
-      // die();
-      if(empty($this->query="")){
-    $this->fields=implode(',',$args);
-    // var_dump($b->fields);
-    // die();
-    $this->query=" SELECT ". $this->fields . " FROM " .$this->table ;
-      }
-    return  $this;
-
+    protected function first(){
+     return $this->select(["*"])->from()->limit(1)->offset(0)->get();
    }
 
       protected function create($data){
-     $b=static::getInstance();
-       $b->type='create';
-        foreach($data as $key=>$value){
+        foreach($data[0] as $key=>$value){
          $field[]=$key;
         $fieldValue[]=$value;
         }
         $implode=implode(",",$field);
         $implode1=implode("','",$fieldValue);
-        self::$query="";
-        self::$query.="INSERT INTO ".static::$table." ( ".$implode." ) "." VALUES "." ( "."'".$implode1."'"." )";
-        self::$query.=';';     
-        return self::get();
+        $this->query="";
+        $this->query.="INSERT INTO ".$this->table." ( ".$implode." ) "." VALUES "." ( "."'".$implode1."'"." )";
+        $this->query.=';';     
+        return $this->get();
       }
     
       protected function find($id){
-     $b=static::getInstance();
-        $b->query="SELECT"."*"." FROM ".static::$table." WHERE " ."id". "=" . $id;
-        $result=static::get();
+        $this->query="SELECT"."*"." FROM ".$this->table." WHERE " ."id". "=" . $id[0];
+        $result=$this->get();
         return $result->fetch_assoc();
       }
       
       
       protected function delete($id){
-     $b=static::getInstance();
-      $b->type='delete';
-        self::$query=" DELETE ". " FROM " . static::$table . " WHERE " . "id" . "=". $id;
-        self::get();
+        $this->query=" DELETE ". " FROM " . $this->table ;
+        $this->get();
       }
 
       
-      protected function update($data,$id){
-     $b=static::getInstance();
-     $b->type='update';
+      protected function update($data){
         $m=1;
-        foreach($data as $key=>$value){
-          self::$base.=$key."='".$value."'";
-          $countData=count($data);
-          if($countData>$m){
+        foreach($data[0] as $key=>$value){
+        $this->base.=$key."='".$value."'";
+          $countData=count($data[0]);
+           if($countData>$m){
             $m++;
-            self::$base.=",";
+            $this->base.=",";
             
           }
         } 
-        if(self::$query){
-          self::$query="";   
+        if($this->query){
+          $this->query="";   
             }
-        self::$query=" UPDATE ". static::$table ." SET ". (self::$base)." WHERE "." id ". "=". $id; 
-        self::$query.=";";
-        self::get();
+        $this->query=" UPDATE ". $this->table ." SET ". ($this->base); 
+        $this->get();
       }
 
 
-      protected  function where(string $field,string $operator="=" ,string $value){
-     $b=static::getInstance();
-        $b->where=[];
-        $b->where[]="$field $operator $value";
-          return $b;
+      protected  function where($args){
+        // var_dump($a);
+        $this->where=[];
+        $this->where[]=" $args[0] $args[1] $args[2]";
+        // $implode=implode(",",$this->where);
+          return $this;
       }
         
         protected function limit( int $start ){
-          self::$limit = " LIMIT " . $start ;
-          self::$query.=self::$limit;
-           return $b=static::getInstance();
+          $this->limit = " LIMIT " . $start ;
+           return $this;
 
         }
         
         protected function offset(int $offset){
-          self::$offset = " OFFSET " . $offset;
-          self::$query.=self::$offset;
-          self::$query.=";";
-           return $b=static::getInstance();
+          $this->offset = " OFFSET " . $offset;
+          return $this;
 
         }
         
@@ -288,20 +243,18 @@ class model extends facade{
   }
 }
 
-  // $k=factory::getInstance(static::$table);
-     $b=static::getInstance();
+    //  $b=static::getInstance();
 
-  $b->get();
+  $this->get();
   return $products;
   }
 
     protected function sort($value,$string){
           $value=$value;
           $string=$string;
-        //  $p=factory::getInstance(static::$table);
-     $b=static::getInstance();
+    //  $b=static::getInstance();
 
-        $c=$b->get();
+        $c=$this->get();
         for($i=1;$i<$c->num_rows;$i++){
           $r=$c->fetch_assoc();
           $y=category::find($r["category"]);
@@ -337,65 +290,67 @@ class model extends facade{
 
         }
     protected function count(){
-          $b=static::getInstance();
-
-          $b->query="SELECT count(*) FROM " . static::$table;
-          // $x=factory::getInstance(static::$table);
-
-          return $b->get();
-        }
+          $this->query="SELECT count(*) FROM " . $this->table;
+          return $this->get();
+    }
     protected function render(){
-    //  var_dump($b);
-     
-    //  if(!in_array($b->type,["create","update"])){
-    //    //  echo "gjsa,v";
-    //    //  $b->from('category');
-    //    $b->query.= $b->from;
-    //    //  var_dump($b->query);
-    //    $b->from='';
-    //   }
+    if($this->update){
+      $this->update.=$this->where;
+      echo "fnao";
+      // die();
+      // var_dump($this->update);
+      // die();
+    }
+    // if($this->delete){
+    //   $this->delete.=$this->where;
+    //   var_dump($this->delete);
+    // }
     if($this->from){
      $this->query.=$this->from;
-     // echo "efs";
      $this->from='';
+    //  var_dump($this->query);  
     }
-    if($this->orderby){
-      $this->query.=$this->orderby;
-      // var_dump($b->query);
-      }
+    if($this->limit){
+      $this->query.=$this->limit;
+    }
+    if($this->offset){
+      $this->query.=$this->offset;
+    }
+    // if($this->orderby){
+    //   $this->query.=$this->orderby;
+    //   // var_dump($this->query);
+    //   }
 
   if($this->join){
     $m=$this->join.=" ON ".implode(",",$this->where);
     $this->query.=$m;
     $this->join='';
     $this->where=[];
-    // var_dump($b->query);
-
   }
-     if($this->where && !$this->join){
-      $this->query.=" WHERE ".implode(",",$this->where);
-      // $m.=" WHERE ".implode(",",$b->where);
-     }
-     
-    //  var_dump($b->query);
-      if($b->group){
-       $b->query.=$b->group;
-       $b->group='';
+  
+  //  if($this->where && !$this->join){
+  //     $this->query.=" WHERE ".implode(",",$this->where);
+  //   }
+    // var_dump($this->query);
+    
+    if(!empty($this->where)){
+      $this->query.=" WHERE ".implode('',$this->where);
+    }
+      if($this->group){
+       $this->query.=$this->group;
+       $this->group='';
       }
-      if($b->having){
-        $b->query.=$b->having;
-      }
-      // if($b->null){
-      //   $b->query.=$b->null;
-      //   // $b->query='';
-      // //  var_dump($b->query);
+      // if($this->having){
+      //   $this->query.=$this->having;
+      //   // var_dump($this->query);
       // }
-      return $b->query;
+      return $this->query;
          }
-        protected  function get(){  
+        protected function get(){  
         $this->getObj();
           $sql= $this->render();
-          var_dump($sql);
+          // var_dump($sql);
+          // die();
           return $this->connection->query($sql);
           
         }

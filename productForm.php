@@ -7,11 +7,11 @@
       //include("model/modelCategory.php");
       // $category=factory::factory("category");
       // var_dump($category);
-      $result = category::select(["id","title","description"])->get();
+      $result = category::select("*")->from()->get();
     //   echo $result -> num_rows ;
       // var_dump($result);
       ?>
-    <form action="getProductForm" method="post">
+    <form action="http://localhost/ecommerce/getProductForm" method="post">
         <input type="text" name='name'>
         <input type="text" name='price'>
         <!-- <input type="text" name='category'> -->
@@ -24,7 +24,7 @@
                 // echo $categorytitle;
                 ?>
                 <option value="<?=$categorytitle['id'];?>">
-                    <?= $categorytitle['title'];?>
+                    <?= $categorytitle['name'];?>
                 </option>
             <?php
             }

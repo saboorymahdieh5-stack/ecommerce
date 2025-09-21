@@ -1,8 +1,9 @@
 <?php 
     $sort=$_POST["sort"];
-    var_dump($sort);
+//     var_dump($_POST);
+//     die();
     // $value=$_POST["price"];
-$result=product::select(["*"])->from("product")->orderBy($sort)->get();
+$result=product::select("product.*")->from()->orderBy($sort)->get();
 while($sort=$result->fetch_assoc()){
 ?>
 <div>

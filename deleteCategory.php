@@ -1,9 +1,4 @@
 <?php 
-
-//include("model/modelCategory.php");
-
-// $id=$_POST['id'];
-$id=$GLOBALS['urlArray'][4];
-// $category=factory::factory("category");
+$id=$GLOBALS['urlArray'][3];
 $integer=(int)$id;
-category::delete($integer);
+category::where("id","=",$integer)->delete($integer);

@@ -1,12 +1,12 @@
 <?php
 class autoload{
     public function autoload($className){
-        $addres='model/' . $className . '.php';
-        if(!file_exists($addres)){
-            $addres = $className . '.php';
+        $addres=$className . '.php';
+        if(file_exists($addres)){
+            include($addres);
+        }else if(file_exists('controller/'.$addres)){
+            include('controller/'.$addres);
         }
-        include ($addres);
-    
     }
 }
 $autoload = new autoload;

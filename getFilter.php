@@ -1,7 +1,7 @@
 <?php 
 if($_POST["filter"]=="withProduct"){
     // echo "lanbjd";
-$result=category::select(["category.id","category.name","category.description"])->from("category")->join("product",["category"=>["name","category"]])->get();
+$result=category::select("*")->from()->join("product")->get();
 // var_dump($result);
 // die();
 while($row=$result->fetch_assoc()){
@@ -20,11 +20,11 @@ while($row=$result->fetch_assoc()){
 <?php
 }
 }else{
-$result1=category::select(["*"])->count1(product::class,"pro_count");
+$result1=category::select("*")->count1("pro_count");
 // var_dump($result1);
 // die();
 while($row1=$result1->fetch_assoc()){
-var_dump($row1);        
+// var_dump($row1);        
 if($row1["pro_count"]==0){
     echo $row1['id'];
     echo $row1['name'];

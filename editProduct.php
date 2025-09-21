@@ -1,15 +1,11 @@
 <?php 
-$id=$GLOBALS['urlArray'][4];
-// $product=factory::factory("product");
-// $category=factory::factory("category");
+$id=$GLOBALS['urlArray'][3];
 $integer=(int)$id;
 $product1=product::find($integer);
-// var_dump($product1);
-// $result=$product1->fetch_assoc();
-$category1=category::select(["title"]);
+$category1=category::select(["name"]);
 
 ?>
-<form action="http://localhost/tamrinb/ecommerce1/updateProduct/<?=$GLOBALS['urlArray'][4]?>" method="post">
+<form action="http://localhost/ecommerce/updateProduct/<?=$GLOBALS['urlArray'][3]?>" method="post">
     <input type="text" name="name" value="<?= $product1['name'];?>">
     <input type="number" name="price" value="<?= $product1['price'];?>">
     <input type="text" name="description" value="<?= $product1['description'];?>">
@@ -19,8 +15,8 @@ $category1=category::select(["title"]);
         for($i=0;$i<$category1->num_rows;$i++){
             $categoryTitle=$category1->fetch_assoc();
             ?>
-            <option value="<?php echo $categoryTitle['title']?>">
-                <?php echo $categoryTitle['title'];?>
+            <option value="<?php echo $categoryTitle[1]?>">
+                <?php echo $categoryTitle[1];?>
         </option>
         <?php 
         }
